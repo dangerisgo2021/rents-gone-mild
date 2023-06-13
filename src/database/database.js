@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.NEXT_ATLAS_URI;
 const options = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -9,7 +9,7 @@ const options = {
 let mongoClient = null;
 let database = null;
 
-if (!process.env.MONGODB_URI) {
+if (!uri) {
   throw new Error("Please add your Mongo URI to .env.*");
 }
 
@@ -29,6 +29,7 @@ export async function connectToDatabase() {
       mongoClient = await new MongoClient(uri, options).connect();
     }
     database = await mongoClient.db(process.env.NEXT_ATLAS_DATABASE);
+    console.log({database})
     return { mongoClient, database };
   } catch (e) {
     console.error(e);
