@@ -13,14 +13,16 @@ export default async function handler(req, res) {
     const insertResult = await collection.insertOne(newMessage);
 
     // return message back to sender as receipt
-    res.status(200).json({ message: { newMessage, id: insertResult.insertedId } });
-  
+    res
+      .status(200)
+      .json({ ...newMessage, id: insertResult.insertedId, _id: undefined });
+
     // trigger subscribers
 
     // process and create events
 
     // save events to event store
-    
+
     //response
   } else {
     // Handle any other HTTP method
