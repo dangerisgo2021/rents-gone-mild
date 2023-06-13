@@ -17,7 +17,7 @@ export const LoginButton = () => {
         loginWithRedirect();
       }}
     >
-      Login - {process.env.NEXT_PUBLIC_AUTH_REDIRECT_URI}
+      Login
     </button>
   );
 };
