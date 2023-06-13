@@ -1,4 +1,5 @@
 import { Auth0Provider } from "@auth0/auth0-react";
+import { SessionProvider } from "../src/session/session-provider.js";
 
 export default ({ Component, pageProps }) => {
   return (
@@ -9,7 +10,9 @@ export default ({ Component, pageProps }) => {
         redirect_uri: process.env.NEXT_PUBLIC_AUTH_REDIRECT_URI,
       }}
     >
-      <Component {...pageProps} />
+      <SessionProvider>
+        <Component {...pageProps} />
+      </SessionProvider>
     </Auth0Provider>
   );
 };
