@@ -7,7 +7,6 @@ export const createMessageFromHttpReq = ({ req }) => {
     messageId,
     creator: headers.authorization, //exchange access token for creator later
     created: now,
-    updated: now,
     domain,
     messageType, // [command, event, doc]
     payload,
