@@ -10,9 +10,8 @@ export const userLoggedInAggregator = async ({ message }) => {
   const update = { $set: { lastLogIn: message.created } };
   const options = { upsert: true };
 
-  let result = undefined;
   try {
-    result = await userCollection.findOneAndUpdate(query, update, options);
+    await userCollection.updateOne(query, update, options);
   } catch (err) {
     console.error(
       "userLoggedInAggregator error",
@@ -20,10 +19,4 @@ export const userLoggedInAggregator = async ({ message }) => {
       err
     );
   }
-
-  // return user id
-  return {
-    aggregator: "userLoggedInAggregator",
-    userId: result?.value?._id,
-  };
 };

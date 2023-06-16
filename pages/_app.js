@@ -1,5 +1,7 @@
 import { Auth0Provider } from "@auth0/auth0-react";
 import { SessionProvider } from "../src/session/session-provider.js";
+import { Layout } from "../src/components/layout.js";
+import "../src/css/reset.css"
 
 export default ({ Component, pageProps }) => {
   return (
@@ -11,7 +13,9 @@ export default ({ Component, pageProps }) => {
       }}
     >
       <SessionProvider>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </SessionProvider>
     </Auth0Provider>
   );
