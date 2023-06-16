@@ -29,7 +29,7 @@ export async function connectToDatabase() {
       mongoClient = await new MongoClient(uri, options).connect();
     }
     database = await mongoClient.db(process.env.NEXT_ATLAS_DATABASE);
-    console.log({database})
+
     return { mongoClient, database };
   } catch (e) {
     console.error(e);

@@ -1,6 +1,6 @@
 export const userLoggedInEvent = () => {
   return {
-    domain: "auth",
+    domain: "user",
     messageId: "user_logged_in",
     messageType: "event",
   };
