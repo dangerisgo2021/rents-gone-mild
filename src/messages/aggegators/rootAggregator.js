@@ -1,4 +1,4 @@
-import { userAggregateWatcher } from "./auth/aggregate/userAggregateWatcher.js";
+import { userAggregateWatcher } from "../../user/aggregates/userAggregateWatcher.js";
 
 export const rootAggregator = ({ message }) => {
   const watchersPromise = [userAggregateWatcher].map((watcher) =>

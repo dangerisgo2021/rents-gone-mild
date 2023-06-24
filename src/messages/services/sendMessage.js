@@ -7,7 +7,7 @@ export const sendMessage = async ({ message, options }) => {
       },
       body: JSON.stringify(message),
     });
-    console.log({ message: await response.json() });
+    console.debug({ message: await response.json() });
   } catch (err) {
     console.error(err);
   }

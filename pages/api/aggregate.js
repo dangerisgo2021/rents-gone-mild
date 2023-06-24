@@ -1,4 +1,4 @@
-import { rootAggregator } from "../../src/domains/rootAggregator.js";
+import { rootAggregator } from "../../src/messages/aggegators/rootAggregator.js";
 
 const documentToMessageMapper = ({ doc }) => {
   return !doc

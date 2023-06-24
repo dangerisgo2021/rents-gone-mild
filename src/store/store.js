@@ -1,7 +1,6 @@
-import { createStore } from './createStore'
+import { createStore } from './utils/createStore'
+import { storeConfig } from "./configs/store.config.js";
 
-export const store = createStore({
-  initialState: { session: 1 },
-  rootReducer: (state) => state
-})
-console.log("created store", store.getState())
+export const store = createStore(storeConfig)
+
+console.debug("created store with initial state:", store.getState())

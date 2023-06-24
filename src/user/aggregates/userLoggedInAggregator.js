@@ -1,15 +1,14 @@
-import { connectToDatabase } from "../../../database/database.js";
+import { connectToDatabase } from "../../database/database.js";
 
 export const userLoggedInAggregator = async ({ message }) => {
-  // just upserting should create a user but upsert doesnt return the user id
+  // TODO: move to repo
   const { database } = await connectToDatabase();
   const userCollection = database.collection("users");
-  // if user exists update last login date
   const query = { email: message.creator };
-  // else create new user
   const update = { $set: { lastLogIn: message.created } };
+  // upserting means that the first login for an email will create a new user
   const options = { upsert: true };
-
+  // TODO: move to service
   try {
     await userCollection.updateOne(query, update, options);
   } catch (err) {
