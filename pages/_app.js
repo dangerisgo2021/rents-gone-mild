@@ -1,8 +1,11 @@
 import { Auth0Provider } from "@auth0/auth0-react";
+import { QueryProvider } from "../src/client/components/query-provider.js";
 import { SessionProvider } from "../src/session/components/session-provider.js";
 import { Layout } from "../src/layout/components/layout.js";
 import { StoreProvider } from "../src/store/components/store-provider.js";
 import "../src/layout/css/reset.css";
+
+
 
 export default ({ Component, pageProps }) => {
   return (
@@ -13,13 +16,15 @@ export default ({ Component, pageProps }) => {
         redirect_uri: process.env.NEXT_PUBLIC_AUTH_REDIRECT_URI,
       }}
     >
-      <StoreProvider>
-        <SessionProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </SessionProvider>
-      </StoreProvider>
+      <QueryProvider>
+        <StoreProvider>
+          <SessionProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </SessionProvider>
+        </StoreProvider>
+      </QueryProvider>
     </Auth0Provider>
   );
 };
