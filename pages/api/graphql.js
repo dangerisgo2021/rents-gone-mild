@@ -1,47 +1,8 @@
 import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
-import { gql } from "graphql-tag";
-import { getUserFromAuthorizationHeaderService } from "../../src/user/service/getUserFromAuthorizationHeader.js";
-
-const resolvers = {
-  Query: {
-    hello: () => "world",
-    profileByUser: (parent, args, context) => {
-      console.log({ parent, args, context });
-
-      return {
-        userId: context.userId,
-        username: "wrong",
-      };
-    },
-  },
-};
-
-const typeDefs = gql`
-  enum GENDER {
-    BOY
-    GIRL
-    OTHER
-    UNDISCLOSED
-  }
-
-  type KidProfile {
-    age: Int
-    gender: GENDER
-  }
-
-  type Profile {
-    username: String
-    userId: ID
-    gender: GENDER
-    kids: [KidProfile]
-  }
-
-  type Query {
-    hello: String
-    profileByUser: Profile
-  }
-`;
+import { resolvers } from "../../src/graphql/resolvers.js";
+import { typeDefs } from "../../src/graphql/typeDefs.js";
+import { getUserFromAuthorizationHeaderService } from "../../src/user/service/getUserFromAuthorizationHeader.js"
 
 const server = new ApolloServer({
   resolvers,
@@ -49,7 +10,7 @@ const server = new ApolloServer({
 });
 
 export default startServerAndCreateNextHandler(server, {
-  context: async (req, res) => ({
+  context: async (req) => ({
     userId: await getUserFromAuthorizationHeaderService({
       authenticationHeader: req.headers.authorization,
     }),

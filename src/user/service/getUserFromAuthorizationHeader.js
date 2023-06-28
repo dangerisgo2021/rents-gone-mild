@@ -6,5 +6,5 @@ export const getUserFromAuthorizationHeaderService = async ({
   const { database } = await connectToDatabase();
   const userCollection = database.collection("users");
   const result = await userCollection.findOne({ email: authenticationHeader });
-  return result._id;
+  return result && result._id;
 };

@@ -10,7 +10,7 @@ export const Profile = () => {
   const profileFormFieldsArray = Object.values(form?.fields || {});
   
   // read profile
-  const { profile, profileIsLoading, error } = useReadProfile()
+
   // show form if no profile is present
   
   // show profile if present
