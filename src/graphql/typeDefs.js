@@ -1,4 +1,4 @@
-const { profileTypeDef } = require("../profile/typedefs/profileTypeDef.js");
+import { profileTypeDef } from "../profile/typedefs/profileTypeDef.js";
 import { gql } from "graphql-tag";
 
 // Construct a schema, using GraphQL schema language
