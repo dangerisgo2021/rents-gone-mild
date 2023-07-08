@@ -1,4 +1,6 @@
 import { connectToDatabase } from "../../database/database.js";
+import { sendInternalMessageService } from "../../messages/services/sendInternalMessageService.js";
+import { userCreatedEvent } from "../events/userCreatedEvent.js";
 
 export const userLoggedInAggregator = async ({ message }) => {
   // TODO: move to repo
@@ -9,13 +11,22 @@ export const userLoggedInAggregator = async ({ message }) => {
   // upserting means that the first login for an email will create a new user
   const options = { upsert: true };
   // TODO: move to service
+  let result = undefined;
   try {
-    await userCollection.updateOne(query, update, options);
+    result = await userCollection.updateOne(query, update, options);
   } catch (err) {
     console.error(
       "userLoggedInAggregator error",
       "userCollection.updateOne(query, update, options)",
       err
     );
+  }
+  // when upsertedId has value it means a new user was created
+  if (result?.upsertedId) {
+    const message = userCreatedEvent({ userId: result?.upsertedId });
+    await sendInternalMessageService({
+      message,
+      creator: "userLoggedInAggregator",
+    });
   }
 };

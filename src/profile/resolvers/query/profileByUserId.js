@@ -2,5 +2,6 @@ const {
   findProfileByUserIdService,
 } = require("../../services/findProfileByUserIdService");
 export const profileByUserId = (parent, args) => {
-  return findProfileByUserIdService({ userId: args.userId });
+  const userId = parent?.userId || args.userId;
+  return findProfileByUserIdService({ userId });
 };

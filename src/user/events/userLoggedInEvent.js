@@ -1,7 +1,8 @@
+export const userLoggedInEventId = "user_logged_in";
 export const userLoggedInEvent = () => {
   return {
     domain: "user",
-    messageId: "user_logged_in",
+    messageId: userLoggedInEventId,
     messageType: "event",
   };
 };

@@ -1,4 +1,4 @@
-export const sendMessage = async ({ message, options }) => {
+export const sendClientMessage = async ({ message, options }) => {
   try {
     const response = await fetch(`/api/messages`, {
       method: "post",
