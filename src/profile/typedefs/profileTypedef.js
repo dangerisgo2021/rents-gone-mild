@@ -14,8 +14,9 @@ export const profileTypeDef = gql`
   }
 
   type Profile {
-    username: String
+    id: ID
     userId: ID
+    username: String
     gender: Gender
     kids: [Kids]
     created: Date
