@@ -3,7 +3,7 @@ import { useStore } from "../../store/hooks/useStore.js";
 import { createRoomButtonClickedAction } from "../actions/createRoomButtonClickedAction.js";
 import { lobbyQuery } from "../queries/lobbyQuery.js";
 import { useQuery } from '@apollo/client';
-console.log("hi")
+
 export const Lobby = () => {
   
   const { loading, error, data } = useQuery(lobbyQuery);

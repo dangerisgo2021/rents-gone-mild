@@ -1,6 +1,6 @@
 import { gql } from "graphql-tag";
 
-export const wdwwTypedef = gql`
+export const wdwwTypeDef = gql`
 
   type Game {
     id: ID,
