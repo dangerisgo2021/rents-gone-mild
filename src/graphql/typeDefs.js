@@ -1,5 +1,6 @@
-import { profileTypeDef } from "../profile/typedefs/profileTypedef.js";
+import { profileTypeDef } from "../profile/typedefs/profileTypeDef.js";
 import { gql } from "graphql-tag";
+import { wdwwTypedef } from "../wdww/typedefs/wdww-typedef.js";
 
 // Construct a schema, using GraphQL schema language
 // All imported typeDefs extend the below rootType
@@ -28,4 +29,4 @@ const rootTypeDef = gql`
 
 // Since typeDefs need to be exported as arrays when there are sub-type
 // flattening the list means the arrays dont need to be spread individually
-export const typeDefs = [rootTypeDef, profileTypeDef].flat(1);
+export const typeDefs = [rootTypeDef, profileTypeDef, wdwwTypedef].flat(1);

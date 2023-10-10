@@ -9,6 +9,7 @@ export const createMessageFromHttpReq = ({ req }) => {
     created: now,
     domain,
     messageType, // [command, event, doc]
-    payload,
+    payload: payload && Object.keys(payload).length > 0 ? payload : undefined,
+    client: "http" // the app id of the client sending the message
   };
 };

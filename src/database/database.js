@@ -1,5 +1,6 @@
-import { MongoClient } from "mongodb";
-
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
+export const dbId = mongodb.ObjectId;
 const uri = process.env.MONGODB_URI;
 const options = {
   useUnifiedTopology: true,

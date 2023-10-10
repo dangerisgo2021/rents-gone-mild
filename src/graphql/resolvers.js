@@ -1,5 +1,6 @@
-const { GraphQLScalarType } = require("graphql");
-const { merge } = require("lodash");
+import { GraphQLScalarType } from "graphql";
+import  { merge } from "lodash";
+import { wdwwResolver } from "../wdww/resolvers/wdwwResolver.js";
 
 const { profileResolver } = require("../profile/resolvers/profileResolver.js");
 
@@ -28,4 +29,4 @@ const rootResolver = {
   }),
 };
 
-export const resolvers = merge(rootResolver, profileResolver);
+export const resolvers = merge(rootResolver, profileResolver, wdwwResolver);

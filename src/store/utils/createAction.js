@@ -1,8 +1,8 @@
-export const createAction = ({ domain, type, preMeta, prePayload }) => {
-  const actionType = `${domain}:${type}`;
+export const createAction = ({ domain, messageId, preMeta, prePayload, messageType = "event" }) => {
   const actionCreatorFn = (payload, meta) => ({
     domain,
-    type: actionType,
+    messageId,
+    messageType,
     payload: {
       ...prePayload,
       ...payload,
@@ -13,6 +13,6 @@ export const createAction = ({ domain, type, preMeta, prePayload }) => {
     },
   });
 
-  actionCreatorFn.type = actionType;
+  actionCreatorFn.messageId = messageId;
   return actionCreatorFn;
 };

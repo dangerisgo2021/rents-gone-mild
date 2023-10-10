@@ -11,7 +11,7 @@ export const createStore = ({ rootReducer, initialState }) => {
     getState: () => currentState,
     subscribe: (sub) => {
       subscribers.push(sub);
-
+      // unsubscribe
       return () => {
         let index = subscribers.indexOf(sub);
         if (index !== -1) {

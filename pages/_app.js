@@ -1,4 +1,5 @@
 import { Auth0Provider } from "@auth0/auth0-react";
+import { GraphqlProvider } from "../src/client/components/graphql-provider.js";
 import { QueryProvider } from "../src/client/components/query-provider.js";
 import { SessionProvider } from "../src/session/components/session-provider.js";
 import { Layout } from "../src/layout/components/layout.js";
@@ -16,15 +17,17 @@ export default ({ Component, pageProps }) => {
         redirect_uri: process.env.NEXT_PUBLIC_AUTH_REDIRECT_URI,
       }}
     >
-      <QueryProvider>
-        <StoreProvider>
-          <SessionProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </SessionProvider>
-        </StoreProvider>
-      </QueryProvider>
+      <GraphqlProvider>
+        <QueryProvider>
+          <StoreProvider>
+            <SessionProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </SessionProvider>
+          </StoreProvider>
+        </QueryProvider>
+      </GraphqlProvider>
     </Auth0Provider>
   );
 };
