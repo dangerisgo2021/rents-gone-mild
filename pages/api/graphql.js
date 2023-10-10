@@ -2,7 +2,7 @@ import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { resolvers } from "../../src/graphql/resolvers.js";
 import { typeDefs } from "../../src/graphql/typeDefs.js";
-import { getUserFromAuthorizationHeaderService } from "../../src/user/service/getUserFromAuthorizationHeader.js"
+import { getUserFromAuthorizationHeaderService } from "../../src/user/service/get-user-from-authorization-header.js"
 
 const server = new ApolloServer({
   resolvers,

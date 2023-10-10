@@ -1,4 +1,4 @@
-import { setValue } from "../../store/utils/setValue.js";
+import { setValue } from "../../store/utils/set-value.js";
 
 export const profileFormUpdatedReducer = (state, action) => {
   if (action?.payload?.fieldId) {

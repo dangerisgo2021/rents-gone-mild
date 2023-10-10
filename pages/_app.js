@@ -1,6 +1,5 @@
 import { Auth0Provider } from "@auth0/auth0-react";
-import { GraphqlProvider } from "../src/client/components/graphql-provider.js";
-import { QueryProvider } from "../src/client/components/query-provider.js";
+import { GraphqlProvider } from "../src/graphql/components/graphql-provider.js";
 import { SessionProvider } from "../src/session/components/session-provider.js";
 import { Layout } from "../src/layout/components/layout.js";
 import { StoreProvider } from "../src/store/components/store-provider.js";
@@ -18,15 +17,13 @@ export default ({ Component, pageProps }) => {
       }}
     >
       <GraphqlProvider>
-        <QueryProvider>
-          <StoreProvider>
-            <SessionProvider>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </SessionProvider>
-          </StoreProvider>
-        </QueryProvider>
+        <StoreProvider>
+          <SessionProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </SessionProvider>
+        </StoreProvider>
       </GraphqlProvider>
     </Auth0Provider>
   );

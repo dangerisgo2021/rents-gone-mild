@@ -1,5 +1,5 @@
-import { createMessageFromHttpReq } from "../../src/messages/factories/createMessageFromHttpReq.js";
-import { saveMessageService } from "../../src/messages/services/saveMessageService.js";
+import { createMessageFromHttpReq } from "../../src/messages/factories/create-message-from-http-req.js";
+import { saveMessageService } from "../../src/messages/services/save-message-service.js";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {

@@ -1,4 +1,4 @@
-import { roomsSearchService } from "../../services/roomsSearchService";
+import { roomsSearchService } from "../../services/rooms-search-service.js";
 
 export const rooms = async (_, { search }) => {
   const results = await roomsSearchService({ search });

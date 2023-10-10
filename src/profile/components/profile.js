@@ -1,8 +1,8 @@
 import styles from "../css/profile.module.scss";
-import { getProfileFormSelector } from "../selectors/getProfileFormSelector.js";
-import { useStore } from "../../store/hooks/useStore.js";
-import { profileFormSubmittedAction } from "../actions/profileFormSubmittedAction.js";
-import { ProfileFormField } from "./profileFormField.js";
+import { getProfileFormSelector } from "../selectors/get-profile-form-selector.js";
+import { useStore } from "../../store/hooks/use-store.js";
+import { profileFormSubmittedAction } from "../actions/profile-form-submitted-action.js";
+import { ProfileFormField } from "./profile-form-field.js";
 
 export const Profile = () => {
   const { dispatch, getState } = useStore()

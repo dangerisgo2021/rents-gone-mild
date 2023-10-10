@@ -1,8 +1,8 @@
 import { GraphQLScalarType } from "graphql";
 import  { merge } from "lodash";
-import { wdwwResolver } from "../wdww/resolvers/wdwwResolver.js";
+import { wdwwResolver } from "../wdww/resolvers/wdww-resolver.js";
 
-const { profileResolver } = require("../profile/resolvers/profileResolver.js");
+const { profileResolver } = require("../profile/resolvers/profile-resolver.js");
 
 const rootResolver = {
   Mutation: {

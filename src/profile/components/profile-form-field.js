@@ -1,6 +1,6 @@
-import { profileFormUpdatedAction } from "../actions/profileFormUpdatedAction.js";
-import styles from "../css/profileFormField.module.scss";
-import { useStore } from "../../store/hooks/useStore.js";
+import { profileFormUpdatedAction } from "../actions/profile-form-updated-action.js";
+import styles from "../css/profile-form-field.module.scss";
+import { useStore } from "../../store/hooks/use-store.js";
 
 export const ProfileFormField = ({ formField }) => {
   const { dispatch } = useStore();

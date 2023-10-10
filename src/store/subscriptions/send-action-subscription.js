@@ -1,4 +1,4 @@
-import { sendClientMessage } from "../../client/services/sendClientMessage.js";
+import { sendClientMessage } from "../../client/services/send-client-message.js";
 
 export const sendActionSubscription = (state, action) => {
   if(action?.meta?.sendToServer) {

@@ -1,4 +1,4 @@
-import { rootReducer } from "../reducers/rootReducer.js";
+import { rootReducer } from "../reducers/root-reducer.js";
 
 export const storeConfig = {
   initialState: {

@@ -1,12 +1,10 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { store } from "../../store/store.js";
-import { useStore } from "../../store/hooks/useStore.js";
-import { userLoggedInAction } from "../../user/actions/userLoggedInAction.js";
+import { useStore } from "../../store/hooks/use-store.js";
+import { userLoggedInAction } from "../../user/actions/user-logged-in-action.js";
 
 export const SessionProvider = ({ children }) => {
-  console.log("GraphqlProvider")
-  
   const { dispatch } = useStore();
   const { user } = useAuth0();
 

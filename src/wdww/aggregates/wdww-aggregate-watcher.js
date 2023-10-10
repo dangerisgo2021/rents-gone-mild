@@ -1,14 +1,14 @@
-import { userCreatedEventId } from "../../user/events/userCreatedEvent.js";
-import { createProfileAggregator } from "./createProfileAggregator.js";
+import { id as createRoomButtonClickedActionId  } from "../actions/create-room-button-clicked-action.js";
+import { createRoomAggregator } from "./create-room-aggregator.js";
 
 const messageIdToAggregatorMap = {
-  [userCreatedEventId]: createProfileAggregator,
+  [createRoomButtonClickedActionId]: createRoomAggregator,
 };
 
 //aggregator functions will process the message by:
 // update any domain objects, write to the database, and return all ids of messages created
 
-export const profileAggregateWatcher = ({ message }) => {
+export const wdwwAggregateWatcher = ({ message }) => {
   const aggregator = messageIdToAggregatorMap[message.messageId];
   if (aggregator) {
     return aggregator({ message });

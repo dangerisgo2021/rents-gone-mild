@@ -1,8 +1,8 @@
 import { produce } from "immer";
-import { profileFormUpdatedAction } from "../../profile/actions/profileFormUpdatedAction.js";
-import { userLoggedInAction } from "../../user/actions/userLoggedInAction.js";
-import { profileFormUpdatedReducer } from "../../profile/reducers/profileFormUpdatedReducer.js";
-import { updateUserReducer } from "../../user/reducers/updateUserReducer.js";
+import { profileFormUpdatedAction } from "../../profile/actions/profile-form-updated-action.js";
+import { userLoggedInAction } from "../../user/actions/user-logged-in-action.js";
+import { profileFormUpdatedReducer } from "../../profile/reducers/profile-form-updated-reducer.js";
+import { updateUserReducer } from "../../user/reducers/update-user-reducer.js";
 
 const actionTypeToReducerMap = {
   [profileFormUpdatedAction.type]: profileFormUpdatedReducer,

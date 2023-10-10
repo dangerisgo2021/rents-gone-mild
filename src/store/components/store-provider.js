@@ -5,8 +5,6 @@ import { store } from "../store.js";
 export const storeContext = createContext(store.getState());
 
 export const StoreProvider = ({ children }) => {
-  console.log("StoreProvider")
-  
   const [actionCount, setActionCount] = useState(0);
   const state = store.getState();
   console.log({ actionCount })

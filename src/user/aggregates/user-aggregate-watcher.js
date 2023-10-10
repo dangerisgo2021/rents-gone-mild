@@ -1,5 +1,5 @@
-import { userLoggedInEventId } from "../events/userLoggedInEvent.js";
-import { userLoggedInAggregator } from "./userLoggedInAggregator.js";
+import { userLoggedInEventId } from "../events/user-logged-in-event.js";
+import { userLoggedInAggregator } from "./user-logged-in-aggregator.js";
 
 const messageIdToAggregatorMap = {
   [userLoggedInEventId]: userLoggedInAggregator,

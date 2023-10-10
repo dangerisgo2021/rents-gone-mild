@@ -1,6 +1,6 @@
 import { connectToDatabase } from "../../database/database.js";
-import { sendInternalMessageService } from "../../messages/services/sendInternalMessageService.js";
-import { userCreatedEvent } from "../events/userCreatedEvent.js";
+import { sendInternalMessageService } from "../../messages/services/send-internal-message-service.js";
+import { userCreatedEvent } from "../events/user-created-event.js";
 
 export const userLoggedInAggregator = async ({ message }) => {
   // TODO: move to repo

@@ -1,6 +1,6 @@
-import { profileTypeDef } from "../profile/typedefs/profileTypeDef.js";
 import { gql } from "graphql-tag";
-import { wdwwTypeDef } from "../wdww/typedefs/wdwwTypeDef.js";
+import { profileTypeDef } from "../profile/typedefs/profile-type-def.js";
+import { wdwwTypeDef } from "../wdww/typedefs/wdww-type-def.js";
 
 // Construct a schema, using GraphQL schema language
 // All imported typeDefs extend the below rootType

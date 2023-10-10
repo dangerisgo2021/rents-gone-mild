@@ -1,6 +1,6 @@
-import { profileAggregateWatcher } from "../../profile/aggregates/profileAggregateWatcher.js";
-import { userAggregateWatcher } from "../../user/aggregates/userAggregateWatcher.js";
-import { wdwwAggregateWatcher } from "../../wdww/aggregates/wdwwAggregateWatcher.js";
+import { profileAggregateWatcher } from "../../profile/aggregates/profile-aggregate-watcher.js";
+import { userAggregateWatcher } from "../../user/aggregates/user-aggregate-watcher.js";
+import { wdwwAggregateWatcher } from "../../wdww/aggregates/wdww-aggregate-watcher.js";
 
 export const rootAggregator = ({ message }) => {
   const watchersPromise = [userAggregateWatcher, profileAggregateWatcher, wdwwAggregateWatcher].map(

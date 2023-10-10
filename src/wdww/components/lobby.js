@@ -1,7 +1,7 @@
 import styles from "../css/lobby.module.scss";
-import { useStore } from "../../store/hooks/useStore.js";
-import { createRoomButtonClickedAction } from "../actions/createRoomButtonClickedAction.js";
-import { lobbyQuery } from "../queries/lobbyQuery.js";
+import { useStore } from "../../store/hooks/use-store.js";
+import { createRoomButtonClickedAction } from "../actions/create-room-button-clicked-action.js";
+import { lobbyQuery } from "../queries/lobby-query.js";
 import { useQuery } from '@apollo/client';
 
 export const Lobby = () => {
