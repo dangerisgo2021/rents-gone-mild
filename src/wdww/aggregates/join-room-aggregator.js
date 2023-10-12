@@ -9,7 +9,7 @@ export const joinRoomAggregator = async ({ message }) => {
 
   let shouldAddPlayerToRoom = undefined;
   try {
-    const room = await roomCollection.findOne({ _id: dbId(message?.payload?.roomId)})
+    const room = await roomCollection.findOne({ _id: new dbId(message?.payload?.roomId)})
     console.log({room})
     shouldAddPlayerToRoom = message?.creator && room.players.includes(message?.creator)
   } catch (err) {
