@@ -10,7 +10,7 @@ export const wdwwTypeDef = gql`
   type Room {
     id: ID
     status: String
-    playerIds: [ID]
+    players: [ID]
     game: Game
     started: Boolean
   }

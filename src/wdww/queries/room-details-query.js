@@ -5,7 +5,7 @@ export const roomDetailsQuery = gql`
     roomById(roomId: $roomId) {
       id
       status
-      playerIds
+      players
     }
   }
 `;

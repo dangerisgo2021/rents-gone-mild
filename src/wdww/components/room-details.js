@@ -16,20 +16,26 @@ export const RoomDetails = () => {
   const handleJoinRoomButtonClicked = () => {
     dispatch(joinRoomButtonClickedAction( {roomId: slug}, {sendToServer: true}))
   }
+  const handleStartButtonClicked = () => {
+    dispatch(startButtonClickedAction( {roomId: slug}, {sendToServer: true}))
+  }
   
-  const { id, playerIds } = data?.roomById || {}
+  const { id, players } = data?.roomById || {}
   console.log({data, user})
+  
   return (
     <div className={styles.lobby}>
       <h3>The Room</h3>
-      {user ? <button onClick={handleJoinRoomButtonClicked}>Join Room</button> : <LoginButton />}
+      {!user && <LoginButton />}
+      {user && !players?.includes(user?.email) && <button onClick={handleJoinRoomButtonClicked}>Join Room</button>}
+      {players?.length >= 3 && <button onClick={handleStartButtonClicked}>Start Game</button>}
       {loading && <p>Loading...</p>}
       {error && <p>Error : {error.message}</p>}
       {id && <p>Id : {id}</p>}
-      {playerIds
+      {players
         &&  <ul>
               {
-                playerIds.map((player) => <li key={player}>{player}</li>)
+                players.map((player) => <li key={player}>{player}</li>)
               }
             </ul>}
     </div>
