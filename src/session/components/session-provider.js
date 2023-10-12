@@ -11,7 +11,7 @@ export const SessionProvider = ({ children }) => {
   React.useEffect(() => {
     window.__GLOBAL_STORE__ = store;
     if (user) {
-      dispatch(userLoggedInAction({ user }, {sendToServer: !location.hostname.includes("localhost")}));
+      dispatch(userLoggedInAction({ user }, {sendToServer: false })); // !location.hostname.includes("localhost")
       // sendClientMessage({ message, options }).catch((err) => {
       //   console.error(err, "sendMessage(userLoggedInEvent({user})) failed");
       // });

@@ -13,8 +13,8 @@ export const joinRoomAggregator = async ({ message }) => {
     shouldAddPlayerToRoom = message?.creator && (!room.players || !room.players?.includes(message?.creator))
   } catch (err) {
     console.error(
-      "createRoomAggregator error",
-      "await roomCollection.findOne()",
+      "joinRoomAggregator error",
+      "await roomCollection.findOne({ _id: dbId(message?.payload?.roomId)})",
       err
     );
   }
@@ -23,13 +23,13 @@ export const joinRoomAggregator = async ({ message }) => {
       await roomCollection.updateOne(
         {
           _id: dbId(message?.payload?.roomId),
-          $set: { updated: now,  $push: { players: message?.creator } }
-        }
+        },
+        { $addToSet: { players: message.creator } }
       );
     } catch (err) {
       console.error(
-        "createRoomAggregator error",
-        "roomCollection.insertOne(room)",
+        "joinRoomAggregator error",
+        "roomCollection.updateOne(room)",
         err
       );
     }
