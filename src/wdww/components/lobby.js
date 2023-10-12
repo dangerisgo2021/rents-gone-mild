@@ -20,7 +20,7 @@ export const Lobby = () => {
       <button onClick={handleCreateRoomButtonClicked}>Create Room</button>
       {loading && <p>Loading...</p>}
       {error && <p>Error : {error.message}</p>}
-      {nodes?.map(room => <div key={room?.id}><h4>Room {room?.id?.slice(0,5)}</h4></div>)}
+      {nodes?.map(room => <div key={room?.id}><a href={`/wdww/room/${room.id}`}>Room {room?.id?.slice(-5)}</a></div>)}
     </div>
   );
 };
