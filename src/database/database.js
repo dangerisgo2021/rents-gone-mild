@@ -1,6 +1,6 @@
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
-export const dbId = mongodb.ObjectId;
+export const dbId = (id) => new mongodb.ObjectId(id);
 const uri = process.env.MONGODB_URI;
 const options = {
   useUnifiedTopology: true,

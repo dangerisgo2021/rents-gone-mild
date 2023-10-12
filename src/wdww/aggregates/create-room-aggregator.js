@@ -10,6 +10,7 @@ export const createRoomAggregator = async ({ message }) => {
     player: [],
     status: "created",
     created: now,
+    creator: message.creator
   };
 
   try {
