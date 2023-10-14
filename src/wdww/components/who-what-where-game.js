@@ -242,7 +242,7 @@ export const WhoWhatWhereGame = () => {
                               <h4>Title: {card.title}</h4>
                               <h5>Type: {card.type}</h5>
                               <h5>Wiki: {card.link}</h5>
-                              {card.text.map(text => <p>{text}</p>)}
+                              {card?.text?.map((text, i) => <p key={i}>{text}</p>)}
                             </div>
                           ))}
                         </div>
