@@ -1,0 +1,22 @@
+.WhoWhatWhereGame {
+  border: #6c63ff 1px solid;
+}
+
+.GameControls {
+  border: #6c63ff 1px solid;
+}
+
+.Where {
+  border: #1aa10c 5px solid;
+}
+
+.Hand {
+  border: gold 2px solid;
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.Card {
+  margin: 1rem;
+  border: 5px blue solid;
+}
