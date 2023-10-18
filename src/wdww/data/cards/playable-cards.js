@@ -607,34 +607,6 @@ export const playableCards = [
     ]
   },
   {
-    title: "Eiffel Tower",
-    shortSummary: "An iron lattice tower located on the Champ de Mars in Paris, France, it's one of the most recognized structures in the world.",
-    funFact: "The Eiffel Tower was almost temporarily relocated to Canada in 1967.",
-    discoveryFoundingDate: "Completed in 1889",
-    wikiLink: "https://en.wikipedia.org/wiki/Eiffel_Tower"
-  },
-  {
-    title: "Great Wall of China",
-    shortSummary: "A series of fortifications made of stone, brick, and other materials, it was built along the northern borders of China to protect against invasions.",
-    funFact: "The Great Wall of China is not visible from the Moon with the naked eye. It's a common myth.",
-    discoveryFoundingDate: "Built between the 5th century BC and the 16th century",
-    wikiLink: "https://en.wikipedia.org/wiki/Great_Wall_of_China"
-  },
-  {
-    title: "Statue of Liberty",
-    shortSummary: "A colossal neoclassical sculpture on Liberty Island in New York Harbor within New York City, it is a symbol of freedom and democracy.",
-    funFact: "The seven spikes on the Statue of Liberty's crown represent the seven oceans and the seven continents of the world, indicating the universal concept of liberty.",
-    discoveryFoundingDate: "Dedicated on October 28, 1886",
-    wikiLink: "https://en.wikipedia.org/wiki/Statue_of_Liberty"
-  },
-  {
-    title: "Machu Picchu",
-    shortSummary: "An Incan citadel set high in the Andes Mountains in Peru, renowned for its sophisticated dry-stone walls that fuse huge blocks without the use of mortar.",
-    funFact: "Machu Picchu was never discovered by the Spanish during their conquest, hence it is relatively intact to this day.",
-    discoveryFoundingDate: "Built in the 15th century, rediscovered in 1911",
-    wikiLink: "https://en.wikipedia.org/wiki/Machu_Picchu"
-  },
-  {
     title: "Christ the Redeemer",
     shortSummary: "An iconic statue of Jesus Christ in Rio de Janeiro, Brazil, it’s considered to be the largest Art Deco-style sculpture in the world.",
     funFact: "The statue was struck by lightning during a violent electrical storm in February 2008, which caused some damage to the fingers, head, and eyebrows.",
