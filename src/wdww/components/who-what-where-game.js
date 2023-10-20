@@ -17,15 +17,10 @@ import { whereCards } from "../data/cards/where-cards.js";
 //
 // }
 
-const nextPlayer = ({ gameState }) => {
-  const { players, activePlayer } = gameState
+const getNextPlayer = ({ gameState }) => {
+  const { currentRound } = gameState
   
-  const activeIndex = players
-    .indexOf(activePlayer)
-  
-  const nextIndex = activeIndex === players.length - 1 ? 0 : activeIndex + 1
-  console.log("nextPlayer", {players, nextIndex, activeIndex, activePlayer, x: players[nextIndex]})
-  return players[nextIndex]
+  return currentRound.nextPlayerList.pop()
 }
 
 const update = ({gameState}, action) => {
@@ -44,6 +39,7 @@ const update = ({gameState}, action) => {
     const newRound =  {
       where: _.sample(whereCards),
       chooser,
+      nextPlayerList: nextGameState.players.filter(player => player !== chooser),
       pastChoosers: [chooser],
       currentState: "choose_mission",
       missionCards: _.sampleSize(missionCards, 5),
@@ -52,10 +48,10 @@ const update = ({gameState}, action) => {
     console.log("newRound", {newRound} )
   
     //add round to gameState
-    nextGameState.rounds = [
-      newRound
-    ]
+    nextGameState.rounds.push(newRound)
+    nextGameState.pastChoosers.push(chooser)
     nextGameState.currentRound = newRound
+  
   } else {
     console.log("is round", {round, action} )
     const chooser = _.difference(gameState.players, round.pastChoosers)
@@ -66,9 +62,9 @@ const update = ({gameState}, action) => {
         // take turn
       switch(action.type) {
         case "mission_selected": {
-          const nextActivePlayer = nextPlayer({gameState})
+          const nextActivePlayer = getNextPlayer({gameState})
           console.log("nextActivePlayer !== round.chooser", {nextActivePlayer}, nextActivePlayer !== round.chooser)
-          if(nextActivePlayer !== round.chooser) {
+          if(nextActivePlayer) {
             round.mission = action.payload.mission
             round.currentState = "player_turn"
             nextGameState.activePlayer = nextActivePlayer
@@ -80,16 +76,17 @@ const update = ({gameState}, action) => {
         }
         case "card_played" : {
           console.log("card_played")
-          const nextActivePlayer = nextPlayer({gameState})
-          console.log("nextActivePlayer !== round.chooser", nextActivePlayer !== round.chooser)
-          if(nextActivePlayer !== round.chooser) {
-            round.playedCards = [
-              ...round.playedCards,
-              {
-                ...action.payload.card,
-                player: gameState.activePlayer
-              }
-            ];
+          const nextActivePlayer = getNextPlayer({gameState})
+          console.log("nextActivePlayer", {nextActivePlayer})
+          round.playedCards = [
+            ...round.playedCards,
+            {
+              ...action.payload.card,
+              player: gameState.activePlayer
+            }
+          ];
+          if(nextActivePlayer) {
+            
             round.currentState = "player_turn"
             nextGameState.activePlayer = nextActivePlayer
           } else {
@@ -103,6 +100,42 @@ const update = ({gameState}, action) => {
           round.currentState = "winner_chosen"
           round.winningCard = action.payload.winningCard
           round.winner = action.payload.winningCard.player
+          break;
+        }
+        case "start_next_round" : {
+          const possibleChoosers = nextGameState.players.filter(player => !nextGameState.pastChoosers.includes(player))
+          const chooser = _.sample(possibleChoosers)
+          if(chooser) {
+            const newRound =  {
+              where: _.sample(whereCards),
+              chooser,
+              nextPlayerList: nextGameState.players.filter(player => player !== chooser),
+              currentState: "choose_mission",
+              missionCards: _.sampleSize(missionCards, 5),
+              playedCards: []
+            }
+            nextGameState.pastChoosers.push(chooser)
+            nextGameState.rounds.push(newRound)
+            nextGameState.currentRound = newRound
+          } else {
+            const winningCardCounts = _.countBy(nextGameState.rounds, (round) => {
+              return round.winningCard.player
+            })
+            const { winner,winningCardCount } = Object.entries(winningCardCounts)
+              .reduce((acc, [key, value]) => {
+                if(!acc?.winningCardCount) {
+                  acc.winningCardCount = value
+                  acc.winner = key
+                } else if(acc.winningCardCount < value) {
+                  acc.winningCardCount = value
+                  acc.winner = key
+                }
+                return acc
+              }, {})
+            nextGameState.winner = winner;
+            nextGameState.winningCardCount = winningCardCount;
+          }
+          
           break;
         }
       }
@@ -134,6 +167,7 @@ const startGame = ({gameState}) => {
     started: true,
     hands,
     rounds: [],
+    pastChoosers: [],
     currentRound: undefined,
   }
   console.log({startingGameState})
@@ -146,8 +180,6 @@ export const WhoWhatWhereGame = () => {
     started: false,
     players: [
       "Bob",
-      "John",
-      "Steve",
       "Bill",
       "Ted",
       "Paul"
@@ -182,30 +214,31 @@ export const WhoWhatWhereGame = () => {
       players: [...gameState.players, newPlayerName]
     })
   }
-  
   const handleMissionSelected = ({mission}) => {
     const nextGameState = update({ gameState }, { type: "mission_selected", payload: { mission } })
     console.log("handleMissionSelected", {nextGameState})
   
     setGameState(nextGameState)
   }
-  
   const handlePlayCard = ({card}) => {
     const nextGameState = update({gameState}, { type: "card_played", payload: {card} })
     console.log("handlePlayCard", {nextGameState})
     setGameState(nextGameState)
   }
-  
   const handleChooseWinner = ({winningCard}) => {
     const nextGameState = update({gameState}, { type: "choose_winner", payload: {winningCard} })
     console.log("handleChooseWinner", {nextGameState})
+    setGameState(nextGameState)
+  }
+  const handleStartNextRound = () => {
+    const nextGameState = update({gameState}, { type: "start_next_round" })
+    console.log("handleStartNextRound", {nextGameState})
     setGameState(nextGameState)
   }
   
   console.log("render", {gameState})
   
   const currentRound = gameState.currentRound
-  
   let roundStateRender = undefined;
   if(currentRound) {
     switch (currentRound.currentState) {
@@ -236,8 +269,8 @@ export const WhoWhatWhereGame = () => {
                 <button key={card.title} className={styles.Card} onClick={() => handlePlayCard({card})}>
                   <h4>Title: {card.title}</h4>
                   <h5>Type: {card.type}</h5>
-                  <h5>Wiki: {card.link}</h5>
                   {card?.text?.map((text, i) => <p key={i}>{text}</p>)}
+                  <h5><a href={card?.link}>Wiki</a></h5>
                 </button>
               ))}
             </div>
@@ -248,7 +281,7 @@ export const WhoWhatWhereGame = () => {
       case "choose_winner": {
         roundStateRender = (
           <div>
-            <h1>Choose A winner [{gameState.activePlayer}]</h1>
+            <h1>Choose A winner [{gameState?.currentRound.chooser}]</h1>
             <div className={styles.Hand}>
               {gameState.currentRound.playedCards?.map((card) => (
                 <button key={card.title} className={styles.Card} onClick={() => handleChooseWinner({winningCard: card})}>
@@ -272,7 +305,7 @@ export const WhoWhatWhereGame = () => {
             <button onClick={() => handleStartNextRound()}>
               <h4>Title: {winningCard?.title}</h4>
               <h5>Type: {winningCard?.type}</h5>
-              <h5>Wiki: {winningCard?.link}</h5>
+              <h5><a href={winningCard?.link}>Wiki</a></h5>
               {winningCard?.text?.map((text, i) => <p key={i}>{text}</p>)}
             </button>
           </div>
@@ -294,8 +327,7 @@ export const WhoWhatWhereGame = () => {
       </div>
       
       <div className={styles.GameView}>
-        {
-          currentRound && (
+        {currentRound && (
             <div className={styles.Round}>
               <div>
                 <h1>Round # {gameState?.rounds?.indexOf(gameState.currentRound)}</h1>
@@ -314,14 +346,12 @@ export const WhoWhatWhereGame = () => {
                 </div>
                 {roundStateRender}
               </div>
-              
             </div>
-          )
-        }
+        )}
+        {gameState?.winner && `Congrats ${gameState?.winner} you won with ${gameState?.winningCardCount} missions`}
       </div>
       <div className={styles.Players}>
         Number of players {gameState?.players.length}
-    
         <ul>
           {gameState?.players?.map((player) => (
             <li key={player}>{player}<button onClick={() => {handleRemoveClicked(player)}}>X</button> </li>)
